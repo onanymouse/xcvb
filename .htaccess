@@ -1,0 +1,36 @@
+# Melindungi dari akses langsung ke file tertentu
+<Files ~ "^\.">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "database.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "functions.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Mencegah directory listing
+Options -Indexes
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect semua request ke HTTPS (jika menggunakan SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Blok akses ke file tertentu
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
